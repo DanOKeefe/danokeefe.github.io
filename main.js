@@ -156,7 +156,7 @@ async function makePred(e)  {
 
   config = {
     displaylogo: false,
-    bgcolor: '#ffedd1',
+    plot_bgcolor: '#ffedd1',
   };
   
   Plotly.newPlot(
