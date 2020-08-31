@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="global.css">
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+  <title>Iris Flower Classifier</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Iris Flower Classifier</h1>
+    <h3>
+      We will train a feed-forward neural network to classify iris flowers as the correct species: 
+      Iris-setosa, Iris-versicolor, or Iris-virginica.
+    </h3>
+    <button onclick="LoadAndTrainData()">Train</button>
+    <div id="training">
+      <p> </p>
+    </div>
+    <br>
+    <!-- Will inject input form when done training-->
+    <div id="inputForm"></div>
+    <!-- Will inject confidence plot after first inference -->
+    <div id="confidencePlot"></div>
+  </div>
+  <script src="main.js"></script>
+</body>
+</html>
