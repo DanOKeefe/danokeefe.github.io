@@ -1,5 +1,5 @@
 # Daniel (Tommy) O'Keefe's Portfolio
-My notes and projects related to data science
+My notes and projects related to data scienceo
 
 ## [Machine Learning Notes](https://github.com/DanOKeefe/Machine-Learning-Notes)
 - Explanations and demos of various machine learning topics and techniques
