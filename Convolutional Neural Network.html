@@ -13079,7 +13079,7 @@ div#notebook {
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Convolutional-Neural-Networks">Convolutional Neural Networks<a class="anchor-link" href="#Convolutional-Neural-Networks">&#182;</a></h1><h3 id="Uses">Uses<a class="anchor-link" href="#Uses">&#182;</a></h3><p>Uses of CNNs include computer vision, natural language processing, and voice recognition. It's most popular use is in computer vision/image recognition and used in essentially all state of the art computer vision models.</p>
 <h3 id="How-it-works">How it works<a class="anchor-link" href="#How-it-works">&#182;</a></h3><p>The core layer of a convolutional neural network is the convolutional layer. Unlike in dense layers, not all elements in an input are connected to all weights.</p>
-<p>The convolution operation involves taking a filter (shown as the 3x3 shaded matrix of weight on the left) and compute the element-wise product of the filter matrix with each of its possible alignments over the input (5x5 blue matrix)</p>
+<p>The convolution operation involves taking a filter (shown as the moving 3x3 shaded matrix of weight in the matrix) and computing the element-wise product of the filter matrix with each of its possible alignments over the input (5x5 blue matrix)</p>
 <p>The green matrix shows the resulting product at each alignment or position</p>
 <p>This is an example where the stride is equal to 1. If the stride were equal to 2, we would have shifted over (or down) the filter matrix to get each alignment. This would have resulted in a 2x2 matrix output instead of 3x3</p>
 <p><img src="https://miro.medium.com/max/535/1*Zx-ZMLKab7VOCQTxdZ1OAw.gif" alt="Alt Text"></p>
