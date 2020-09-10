@@ -13081,8 +13081,8 @@ div#notebook {
 <li><a href="#annRet">Annualized returns</a></li>
 <li><a href="#annVol">Annualized volatility</a></li>
 <li><a href="#drawdown">Drawdown at each timestep</a></li>
-<li><a href="#mdd">Max drawdown</a></li>
-<li><a href="#semideviation">Semideviation of returns distribution</a></li>
+<li><a href="#mdd">Maximum drawdown</a></li>
+<li><a href="#semideviation">Semideviation</a></li>
 <li><a href="#cvar">Conditional Value at Risk</a></li>
 <li><a href="#sharpe">Sharpe Ratio</a></li>
 <li><a href="#skewness">Skewness of returns distribution</a></li>
@@ -13098,7 +13098,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -13115,13 +13115,13 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Retrieve-the-monthly-returns-for-49-industries-from-1960-to-2018">Retrieve the monthly returns for 49 industries from 1960 to 2018<a class="anchor-link" href="#Retrieve-the-monthly-returns-for-49-industries-from-1960-to-2018">&#182;</a></h3>
+<h4 id="Retrieve-the-monthly-returns-for-49-industries-from-1960-to-2018">Retrieve the monthly returns for 49 industries from 1960 to 2018<a class="anchor-link" href="#Retrieve-the-monthly-returns-for-49-industries-from-1960-to-2018">&#182;</a></h4>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">erk</span><span class="o">.</span><span class="n">get_ind_returns</span><span class="p">(</span><span class="n">n_inds</span><span class="o">=</span><span class="mi">49</span><span class="p">)[</span><span class="s1">&#39;1960&#39;</span><span class="p">:]</span>
@@ -13135,7 +13135,78 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="For-the-next-few-statistics,-consider-a-portfolio-holding-a-portfolio-holding-100%-Beer-industry-stocks">For the next few statistics, consider a portfolio holding a portfolio holding 100% Beer industry stocks<a class="anchor-link" href="#For-the-next-few-statistics,-consider-a-portfolio-holding-a-portfolio-holding-100%-Beer-industry-stocks">&#182;</a></h3><h3 id="Calculate-the-annualized-return-">Calculate the annualized return <a class="anchor" id="annRet" /><a class="anchor-link" href="#Calculate-the-annualized-return-">&#182;</a></h3>
+<h3 id="Annualized-returns-">Annualized returns <a class="anchor" id="annRet" /><a class="anchor-link" href="#Annualized-returns-">&#182;</a></h3><p>Annualizing returns allow us to compare returns over different lengths of time. If you are annualizing a return for an investment that took less than a year, you can think of the annualized return as the total return if you had continued seeing that rate of return for a full year.</p>
+<p>$r_a = (1 + r_{\text{total}})^{P/n} - 1$</p>
+<p>where $P$ is the number of periods per year.</p>
+<p>and $n$ is the number of periods.</p>
+<p>If we have a set of 25 monthly returns, $P=12$ and $n=25$</p>
+<p>If we have a set of 3 quarterly returns, $P=4$ and $n=3$</p>
+<p>If we have an investment that returned 9% over 2 years, $P=1$ and $n=2$</p>
+<p>For example, if you have an investment that returned 0.5% over one month, the annualized return would be equal to $(1 + 0.005)^{12} - 1 = 6.17$%.</p>
+<p>If you have an investment that returned 1% over two months, the annualized return would be equal to $(1 + 0.01)^{12/2} - 1 = 6.15$%.</p>
+<p>If you have an investment that returned 15% over 3 years, the annualized return would be equal to $(1 + 0.15)^{1/3} - 1 = 4.77$%.</p>
+<p>If you have an investment that retured 15% over 28 months, the annualized return would be equal to $(1 + 0.15)^{12/28} - 1 = 6.17$%.</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">annualize_rets</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">periods_per_year</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Annualizes a set of returns</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">compounded_growth</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">r</span><span class="p">)</span><span class="o">.</span><span class="n">prod</span><span class="p">()</span>
+    <span class="n">n_periods</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">compounded_growth</span><span class="o">**</span><span class="p">(</span><span class="n">periods_per_year</span><span class="o">/</span><span class="n">n_periods</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+</pre></div>
+<p>Consider a portfolio holding 100% Beer industry stocks.</p>
+<p>Calculate the annualized return.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">erk</span><span class="o">.</span><span class="n">annualize_rets</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Beer&#39;</span><span class="p">],</span> <span class="n">periods_per_year</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[3]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0.11920634382896678</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Annnualized-volatility-">Annnualized volatility <a class="anchor" id="annVol" /><a class="anchor-link" href="#Annnualized-volatility-">&#182;</a></h3><p>$\sigma_a = \sigma * \sqrt{P}$</p>
+<p>Where $\sigma$ is the standard deviation of the returns and $P$ is the number of periods per year.</p>
+<p>$\sigma = \sqrt{\frac{\sum_{i=0}^{N}(x_i-\mu)^2}{N-1}}$</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">annualize_vol</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">periods_per_year</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Annualizes the vol of a set of returns</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">r</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">*</span><span class="p">(</span><span class="n">periods_per_year</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+<p>Calculate the annualized volatility of the returns</p>
+
 </div>
 </div>
 </div>
@@ -13144,7 +13215,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">erk</span><span class="o">.</span><span class="n">annualize_rets</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Beer&#39;</span><span class="p">],</span> <span class="n">periods_per_year</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">erk</span><span class="o">.</span><span class="n">annualize_vol</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Beer&#39;</span><span class="p">],</span> <span class="n">periods_per_year</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13163,7 +13234,7 @@ div#notebook {
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>0.11920634382896678</pre>
+<pre>0.17519063591781509</pre>
 </div>
 
 </div>
@@ -13175,7 +13246,30 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Calculate-the-annualized-volatility-">Calculate the annualized volatility <a class="anchor" id="annVol" /><a class="anchor-link" href="#Calculate-the-annualized-volatility-">&#182;</a></h3>
+<h3 id="Drawdown-">Drawdown <a class="anchor" id="drawdown" /><a class="anchor-link" href="#Drawdown-">&#182;</a></h3><p>Drawdown is equal to the value of a portfolio, at a given timestep, subtracted from historical maximum value of the portfolio, expressed as a percentage loss.</p>
+<h4 id="$\text{Drawdown-at-time-T}-=-\frac{(\max-\limits_{t\in-(0,T)}-X(t)-)---X(T)}{\max\limits_{t\in-(0,T)}-X(t)}$">$\text{Drawdown at time T} = \frac{(\max \limits_{t\in (0,T)} X(t) ) - X(T)}{\max\limits_{t\in (0,T)} X(t)}$<a class="anchor-link" href="#$\text{Drawdown-at-time-T}-=-\frac{(\max-\limits_{t\in-(0,T)}-X(t)-)---X(T)}{\max\limits_{t\in-(0,T)}-X(t)}$">&#182;</a></h4><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">drawdown</span><span class="p">(</span><span class="n">return_series</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Takes a time series of asset returns.</span>
+<span class="sd">       returns a DataFrame with columns for</span>
+<span class="sd">       the wealth index, </span>
+<span class="sd">       the previous peaks, and </span>
+<span class="sd">       the percentage drawdown</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wealth_index</span> <span class="o">=</span> <span class="mi">1000</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">return_series</span><span class="p">)</span><span class="o">.</span><span class="n">cumprod</span><span class="p">()</span>
+    <span class="n">previous_peaks</span> <span class="o">=</span> <span class="n">wealth_index</span><span class="o">.</span><span class="n">cummax</span><span class="p">()</span>
+    <span class="n">drawdowns</span> <span class="o">=</span> <span class="p">(</span><span class="n">wealth_index</span> <span class="o">-</span> <span class="n">previous_peaks</span><span class="p">)</span><span class="o">/</span><span class="n">previous_peaks</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;Wealth&quot;</span><span class="p">:</span> <span class="n">wealth_index</span><span class="p">,</span> 
+                         <span class="s2">&quot;Previous Peak&quot;</span><span class="p">:</span> <span class="n">previous_peaks</span><span class="p">,</span> 
+                         <span class="s2">&quot;Drawdown&quot;</span><span class="p">:</span> <span class="n">drawdowns</span><span class="p">})</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Maximum-drawdown-">Maximum drawdown <a class="anchor" id="mdd" /><a class="anchor-link" href="#Maximum-drawdown-">&#182;</a></h3><p>Maximum drawdown over the course of an investment.</p>
+
 </div>
 </div>
 </div>
@@ -13184,7 +13278,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">erk</span><span class="o">.</span><span class="n">annualize_vol</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Beer&#39;</span><span class="p">],</span> <span class="n">periods_per_year</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">erk</span><span class="o">.</span><span class="n">drawdown</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Beer&#39;</span><span class="p">])[</span><span class="s1">&#39;Drawdown&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">*-</span><span class="mi">1</span>
 </pre></div>
 
     </div>
@@ -13203,7 +13297,7 @@ div#notebook {
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>0.17519063591781509</pre>
+<pre>0.5855330578251526</pre>
 </div>
 
 </div>
@@ -13215,7 +13309,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Calculate-the-max-drawdown-">Calculate the max drawdown <a class="anchor" id="mdd" /><a class="anchor-link" href="#Calculate-the-max-drawdown-">&#182;</a></h3>
+<h4 id="What-month-did-max-drawdown-occur-in?">What month did max drawdown occur in?<a class="anchor-link" href="#What-month-did-max-drawdown-occur-in?">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -13224,7 +13318,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">erk</span><span class="o">.</span><span class="n">drawdown</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Beer&#39;</span><span class="p">])[</span><span class="s1">&#39;Drawdown&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">*-</span><span class="mi">1</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">erk</span><span class="o">.</span><span class="n">drawdown</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Beer&#39;</span><span class="p">])[</span><span class="s1">&#39;Drawdown&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmin</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -13243,7 +13337,7 @@ div#notebook {
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>0.5855330578251526</pre>
+<pre>Period(&#39;1974-12&#39;, &#39;M&#39;)</pre>
 </div>
 
 </div>
@@ -13255,7 +13349,22 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="What-month-did-max-drawdown-occur?">What month did max drawdown occur?<a class="anchor-link" href="#What-month-did-max-drawdown-occur?">&#182;</a></h3>
+<h3 id="Semideviation-">Semideviation <a class="anchor" id="semideviation" /><a class="anchor-link" href="#Semideviation-">&#182;</a></h3><p>Semideviation is the standard deviation among the subset of negative asset returns.</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">semideviation</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the semideviation aka negative semideviation of r</span>
+<span class="sd">    r must be a Series or a DataFrame, else raises a TypeError</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
+        <span class="n">is_negative</span> <span class="o">=</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="n">r</span><span class="p">[</span><span class="n">is_negative</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">r</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">semideviation</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Expected r to be a Series or DataFrame&quot;</span><span class="p">)</span>
+</pre></div>
+<p>What was the semideviation of the return distribution?</p>
+
 </div>
 </div>
 </div>
@@ -13264,7 +13373,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">erk</span><span class="o">.</span><span class="n">drawdown</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Beer&#39;</span><span class="p">])[</span><span class="s1">&#39;Drawdown&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmin</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">erk</span><span class="o">.</span><span class="n">semideviation</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Beer&#39;</span><span class="p">])</span>
 </pre></div>
 
     </div>
@@ -13283,7 +13392,7 @@ div#notebook {
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>Period(&#39;1974-12&#39;, &#39;M&#39;)</pre>
+<pre>0.03417051008448179</pre>
 </div>
 
 </div>
@@ -13295,7 +13404,20 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="What-was-its-semideviation?-">What was its semideviation? <a class="anchor" id="semideviation" /><a class="anchor-link" href="#What-was-its-semideviation?-">&#182;</a></h3><p>(Standard deviavation among subset negative asset returns)</p>
+<h3 id="Conditional-Value-at-Risk-(CVaR)-">Conditional Value at Risk (CVaR) <a class="anchor" id="cvar" /><a class="anchor-link" href="#Conditional-Value-at-Risk-(CVaR)-">&#182;</a></h3><p>The conditional value at risk is the expected return given that the return is less than than value at risk.</p>
+<p>$\text{CVaR} = -\text{E}(R|R \leq - \text{VaR})$</p>
+<h3 id="$=-\frac{-\int_{-\infty}^{-\text{VaR}}x-*-f_R(x)dx}{F_R(-\text{VaR})}$">$= \frac{-\int_{-\infty}^{-\text{VaR}}x * f_R(x)dx}{F_R(-\text{VaR})}$<a class="anchor-link" href="#$=-\frac{-\int_{-\infty}^{-\text{VaR}}x-*-f_R(x)dx}{F_R(-\text{VaR})}$">&#182;</a></h3><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">cvar_historic</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Computes the Conditional VaR of Series or DataFrame</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
+        <span class="n">is_beyond</span> <span class="o">=</span> <span class="n">r</span> <span class="o">&lt;=</span> <span class="o">-</span><span class="n">var_historic</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">)</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">r</span><span class="p">[</span><span class="n">is_beyond</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">r</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">cvar_historic</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Expected r to be a Series or DataFrame&quot;</span><span class="p">)</span>
+</pre></div>
 
 </div>
 </div>
@@ -13305,7 +13427,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">erk</span><span class="o">.</span><span class="n">semideviation</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Beer&#39;</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">erk</span><span class="o">.</span><span class="n">cvar_historic</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Beer&#39;</span><span class="p">],</span> <span class="n">level</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13324,7 +13446,7 @@ div#notebook {
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>0.03417051008448179</pre>
+<pre>0.10638611111111114</pre>
 </div>
 
 </div>
@@ -13336,7 +13458,19 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Conditional-Value-at-Risk-(CVaR)-">Conditional Value at Risk (CVaR) <a class="anchor" id="cvar" /><a class="anchor-link" href="#Conditional-Value-at-Risk-(CVaR)-">&#182;</a></h3>
+<h3 id="Sharpe-Ratio-">Sharpe Ratio <a class="anchor" id="sharpe" /><a class="anchor-link" href="#Sharpe-Ratio-">&#182;</a></h3><p>The Sharpe ratio for an investment is its excess return divided by the standard deviation of its returns.</p>
+<h4 id="Sharpe-ratio-=-$\frac{r_a---r_f}{\sigma_a}$">Sharpe ratio = $\frac{r_a - r_f}{\sigma_a}$<a class="anchor-link" href="#Sharpe-ratio-=-$\frac{r_a---r_f}{\sigma_a}$">&#182;</a></h4><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sharpe_ratio</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">riskfree_rate</span><span class="p">,</span> <span class="n">periods_per_year</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Computes the annualized sharpe ratio of a set of returns</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># convert the annual riskfree rate to per period</span>
+    <span class="n">rf_per_period</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">riskfree_rate</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">periods_per_year</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+    <span class="n">excess_ret</span> <span class="o">=</span> <span class="n">r</span> <span class="o">-</span> <span class="n">rf_per_period</span>
+    <span class="n">ann_ex_ret</span> <span class="o">=</span> <span class="n">annualize_rets</span><span class="p">(</span><span class="n">excess_ret</span><span class="p">,</span> <span class="n">periods_per_year</span><span class="p">)</span>
+    <span class="n">ann_vol</span> <span class="o">=</span> <span class="n">annualize_vol</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">periods_per_year</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ann_ex_ret</span><span class="o">/</span><span class="n">ann_vol</span>
+</pre></div>
+
 </div>
 </div>
 </div>
@@ -13345,7 +13479,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">erk</span><span class="o">.</span><span class="n">cvar_historic</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Beer&#39;</span><span class="p">],</span> <span class="n">level</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">erk</span><span class="o">.</span><span class="n">sharpe_ratio</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Beer&#39;</span><span class="p">],</span> <span class="n">riskfree_rate</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">periods_per_year</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13364,7 +13498,7 @@ div#notebook {
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>0.10638611111111114</pre>
+<pre>0.5559722618022646</pre>
 </div>
 
 </div>
@@ -13376,7 +13510,24 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Sharpe-Ratio-">Sharpe Ratio <a class="anchor" id="sharpe" /><a class="anchor-link" href="#Sharpe-Ratio-">&#182;</a></h3>
+<h3 id="Skewness-">Skewness <a class="anchor" id="skewness" /><a class="anchor-link" href="#Skewness-">&#182;</a></h3><p>Skewness measures the asymmetry of a probability distribution. It is the third standardized moment of a random variable.</p>
+<h4 id="$\text{Skewness}[X]-=-\text{E}[(\frac{X-\mu}{\sigma})^3]-=-\frac{\text{E}[(X---\mu)^3]}{(\text{E}[(X---\mu)^2])^{3/2}}$">$\text{Skewness}[X] = \text{E}[(\frac{X-\mu}{\sigma})^3] = \frac{\text{E}[(X - \mu)^3]}{(\text{E}[(X - \mu)^2])^{3/2}}$<a class="anchor-link" href="#$\text{Skewness}[X]-=-\text{E}[(\frac{X-\mu}{\sigma})^3]-=-\frac{\text{E}[(X---\mu)^3]}{(\text{E}[(X---\mu)^2])^{3/2}}$">&#182;</a></h4><p>Normal distributions have a skessness of 0.</p>
+<p>Example of a negative and positibe skew:</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Negative_and_positive_skew_diagrams_%28English%29.svg/892px-Negative_and_positive_skew_diagrams_%28English%29.svg.png" alt="skew"></p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">skewness</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Alternative to scipy.stats.skew()</span>
+<span class="sd">    Computes the skewness of the supplied Series or DataFrame</span>
+<span class="sd">    Returns a float or a Series</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">demeaned_r</span> <span class="o">=</span> <span class="n">r</span> <span class="o">-</span> <span class="n">r</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="c1"># use the population standard deviation, so set dof=0</span>
+    <span class="n">sigma_r</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">exp</span> <span class="o">=</span> <span class="p">(</span><span class="n">demeaned_r</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">exp</span><span class="o">/</span><span class="n">sigma_r</span><span class="o">**</span><span class="mi">3</span>
+</pre></div>
+<p>What is the skewness of this return distribution?</p>
+
 </div>
 </div>
 </div>
@@ -13385,7 +13536,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">erk</span><span class="o">.</span><span class="n">sharpe_ratio</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Beer&#39;</span><span class="p">],</span> <span class="n">riskfree_rate</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">periods_per_year</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">erk</span><span class="o">.</span><span class="n">skewness</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Beer&#39;</span><span class="p">])</span>
 </pre></div>
 
     </div>
@@ -13404,47 +13555,6 @@ div#notebook {
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>0.5559722618022646</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Skewness-">Skewness <a class="anchor" id="skewness" /><a class="anchor-link" href="#Skewness-">&#182;</a></h3><p>Normal distributions have a skessness of 0</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">erk</span><span class="o">.</span><span class="n">skewness</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Beer&#39;</span><span class="p">])</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[11]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
 <pre>-0.010471512193777247</pre>
 </div>
 
@@ -13457,7 +13567,60 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Kurtosis-">Kurtosis <a class="anchor" id="kurtosis" /><a class="anchor-link" href="#Kurtosis-">&#182;</a></h3><p>Normal distributions have a kurtosis of 3</p>
+<p>Which industry at the most negatively skewed return distribution?</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">erk</span><span class="o">.</span><span class="n">skewness</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">idxmin</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Meals
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Kurtosis-">Kurtosis <a class="anchor" id="kurtosis" /><a class="anchor-link" href="#Kurtosis-">&#182;</a></h3><p>Kurtosis is a measure of the size of the tail of a probability distribution. It is the fourth standardized moment of a random variable.</p>
+<h4 id="$\text{Kurtosis}[X]-=-\text{E}[(\frac{X-\mu}{\sigma})^4]-=-\frac{\text{E}[(X---\mu)^4]}{(\text{E}[(X---\mu)^2])^{2}}$">$\text{Kurtosis}[X] = \text{E}[(\frac{X-\mu}{\sigma})^4] = \frac{\text{E}[(X - \mu)^4]}{(\text{E}[(X - \mu)^2])^{2}}$<a class="anchor-link" href="#$\text{Kurtosis}[X]-=-\text{E}[(\frac{X-\mu}{\sigma})^4]-=-\frac{\text{E}[(X---\mu)^4]}{(\text{E}[(X---\mu)^2])^{2}}$">&#182;</a></h4><p>Normal distributions have a kurtosis of 3.</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">kurtosis</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Alternative to scipy.stats.kurtosis()</span>
+<span class="sd">    Computes the kurtosis of the supplied Series or DataFrame</span>
+<span class="sd">    Returns a float or a Series</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">demeaned_r</span> <span class="o">=</span> <span class="n">r</span> <span class="o">-</span> <span class="n">r</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="c1"># use the population standard deviation, so set dof=0</span>
+    <span class="n">sigma_r</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">exp</span> <span class="o">=</span> <span class="p">(</span><span class="n">demeaned_r</span><span class="o">**</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">exp</span><span class="o">/</span><span class="n">sigma_r</span><span class="o">**</span><span class="mi">4</span>
+</pre></div>
+<p>What is the kurtosis of this return distribution?</p>
 
 </div>
 </div>
@@ -13498,13 +13661,67 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Do-the-monthly-returns-follow-the-normal-distribution?-">Do the monthly returns follow the normal distribution? <a class="anchor" id="normality" /><a class="anchor-link" href="#Do-the-monthly-returns-follow-the-normal-distribution?-">&#182;</a></h3>
+<p>Which industry had a returns distribution with the largest kurtosis?</p>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">erk</span><span class="o">.</span><span class="n">kurtosis</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">idxmax</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>RlEst
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Test-for-normality-">Test for normality <a class="anchor" id="normality" /><a class="anchor-link" href="#Test-for-normality-">&#182;</a></h3><p>Test whether a distribution of data has a skewness and kurtosis that indicate the data matches a normal distribution.</p>
+<p>Calculate the test statistics, $JB = \frac{n}{6}(S^2 + \frac{1}{4}(K-3)^2)$ and choose a $p$-value to test at.</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">is_normal</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.01</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Applies the Jarque-Bera test to determine if a Series is normal or not</span>
+<span class="sd">    Test is applied at the 1% level by default</span>
+<span class="sd">    Returns True if the hypothesis of normality is accepted, False otherwise</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">r</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">is_normal</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">statistic</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">jarque_bera</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">p_value</span> <span class="o">&gt;</span> <span class="n">level</span>
+</pre></div>
+<p>Do these monthly returns follow the normal distribution?</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">erk</span><span class="o">.</span><span class="n">is_normal</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Beer&#39;</span><span class="p">],</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
@@ -13520,7 +13737,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[13]:</div>
+    <div class="prompt output_prompt">Out[14]:</div>
 
 
 
@@ -13538,13 +13755,32 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Monthly-parametric-Gaussian-VaR-">Monthly parametric Gaussian VaR <a class="anchor" id="gaussVar" /><a class="anchor-link" href="#Monthly-parametric-Gaussian-VaR-">&#182;</a></h3>
+<h3 id="Monthly-parametric-Gaussian-VaR-">Monthly parametric Gaussian VaR <a class="anchor" id="gaussVar" /><a class="anchor-link" href="#Monthly-parametric-Gaussian-VaR-">&#182;</a></h3><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">var_gaussian</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">modified</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the Parametric Gauusian VaR of a Series or DataFrame</span>
+<span class="sd">    If &quot;modified&quot; is True, then the modified VaR is returned,</span>
+<span class="sd">    using the Cornish-Fisher modification</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># compute the Z score assuming it was Gaussian</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">level</span><span class="o">/</span><span class="mi">100</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">modified</span><span class="p">:</span>
+        <span class="c1"># modify the Z score based on observed skewness and kurtosis</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">skewness</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">kurtosis</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="p">(</span><span class="n">z</span> <span class="o">+</span>
+                <span class="p">(</span><span class="n">z</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">s</span><span class="o">/</span><span class="mi">6</span> <span class="o">+</span>
+                <span class="p">(</span><span class="n">z</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">z</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="mi">24</span> <span class="o">-</span>
+                <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">z</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="mi">5</span><span class="o">*</span><span class="n">z</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">s</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">36</span>
+            <span class="p">)</span>
+    <span class="k">return</span> <span class="o">-</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">+</span> <span class="n">z</span><span class="o">*</span><span class="n">r</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+</pre></div>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">erk</span><span class="o">.</span><span class="n">var_gaussian</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Beer&#39;</span><span class="p">],</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -13560,7 +13796,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[14]:</div>
+    <div class="prompt output_prompt">Out[15]:</div>
 
 
 
@@ -13584,50 +13820,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">erk</span><span class="o">.</span><span class="n">var_gaussian</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Beer&#39;</span><span class="p">],</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">modified</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[15]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>0.13615629641279908</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Monthly-historic-VaR-">Monthly historic VaR <a class="anchor" id="historicVar" /><a class="anchor-link" href="#Monthly-historic-VaR-">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
 <div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">erk</span><span class="o">.</span><span class="n">var_historic</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Beer&#39;</span><span class="p">],</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">erk</span><span class="o">.</span><span class="n">var_gaussian</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Beer&#39;</span><span class="p">],</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">modified</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13646,7 +13842,7 @@ div#notebook {
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>0.138299</pre>
+<pre>0.13615629641279908</pre>
 </div>
 
 </div>
@@ -13736,89 +13932,13 @@ Industry with lowest annualized return: Softw
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Which-industry-returns-were-most-negatively-skewed?">Which industry returns were most negatively skewed?<a class="anchor-link" href="#Which-industry-returns-were-most-negatively-skewed?">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">erk</span><span class="o">.</span><span class="n">skewness</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">idxmin</span><span class="p">())</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Meals
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Which-industry-returns-distributions-had-the-highest-kurtosis">Which industry returns distributions had the highest kurtosis<a class="anchor-link" href="#Which-industry-returns-distributions-had-the-highest-kurtosis">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">erk</span><span class="o">.</span><span class="n">kurtosis</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">idxmax</span><span class="p">())</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>RlEst
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Display-summary-stats-of-all-the-industries">Display summary stats of all the industries<a class="anchor-link" href="#Display-summary-stats-of-all-the-industries">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">erk</span><span class="o">.</span><span class="n">summary_stats</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
@@ -13834,7 +13954,7 @@ Industry with lowest annualized return: Softw
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[21]:</div>
+    <div class="prompt output_prompt">Out[19]:</div>
 
 
 
