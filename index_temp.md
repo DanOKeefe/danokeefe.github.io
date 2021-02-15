@@ -26,7 +26,3 @@
 - [How to Win a Data Science Competition: Learn from Top Kagglers](https://coursera.org/share/1fc1342d60e64d2c6dca87756e78d639)
 - [Introduction to Portfolio Construction and Analysis with Python](https://coursera.org/share/068a2f64c107a37cc575dfdd66ee645b)
 - [Advanced Portfolio Construction and Analysis with Python](https://coursera.org/share/f5c2fb4cbb6c22b41fbd6df51ba6dddb)
-
----
-<p style="font-size:11px">Page template forked from <a href="https://github.com/evanca/quick-portfolio">evanca</a></p>
-<!-- Remove above link if you don't want to attibute -->
