@@ -1,6 +1,6 @@
 theme: jekyll-theme-minimal
 title: Daniel O'Keefe
-logo: "/images/photo_cropped.PNG?raw=true"
+logo: "/photo_cropped.PNG?raw=true"
 description: >
   <center>
   <b>Applications of Data Science</b>
@@ -10,3 +10,4 @@ description: >
   <a href="https://github.com/DanOKeefe">GitHub</a>   
   <a> | </a>
   <a href="https://medium.com/@dantokeefe">Medium</a> 
+google_analytics: UA-000000-0 # your Google Analytics tracking ID here
