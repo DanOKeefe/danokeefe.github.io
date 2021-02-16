@@ -1,15 +1,13 @@
-## Portfolio
+### 2020
 
----
-
-### Category Name 1 
-
-[Project 1 Title](/sample_page)
-<img src="images/dummy_thumbnail.jpg?raw=true"/>
+[Creating a Near Real-Time Financial News Dataset with AWS Lambda](	https://dantokeefe.medium.com/creating-a-near-real-time-financial-news-dataset-with-aws-lambda-509e2fe53261)
+<img src="_images/lambda.PNG?raw=true"/>
+- Deploy an automated serverless function with AWS Lambda to scrape and parse CNBC Finance articles daily.
+- Create a deployment package with Python libraries not included in the AWS Lambda Python 3.8 environment.
+- Save text files in an S3 bucket organized by year, month, and day, making it easily queryable from AWS Athena.
 
 ---
 [Project 2 Title](/pdf/sample_presentation.pdf)
-<img src="images/dummy_thumbnail.jpg?raw=true"/>
 
 ---
 
