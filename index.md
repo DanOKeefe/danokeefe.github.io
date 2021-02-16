@@ -5,7 +5,11 @@
 - Create a deployment package with Python libraries not included in the AWS Lambda Python 3.8 environment.
 - Save text files in an S3 bucket organized by year, month, and day, making it easily queryable from AWS Athena.
 
-<img src="_images/lambda.PNG?" width="200" height="100"/>
+#### [Iris Flower Classifier Web Application](https://github.com/DanOKeefe/Iris-Flower-Classifier-TF.js)
+- Web application developed with TensorFlow.js that trains a feed-forward neural network within client's browser.
+- Enables the client to run live inference on custom inputs.
+- Visualizes confidence of the model's predictions using Plotly.js.
+- GitHub repo for the project [here](https://danokeefe.github.io/iris.html).
 
 #### [COVID-19 Dashboard](https://github.com/DanOKeefe/COVID-19-Dashboard)
 - Web application for visualizing COVID-19 case density across the U.S. and Florida
@@ -14,12 +18,41 @@
 - Retrieves data from Johns Hopkins repository
 - Ran on a VM with Google Cloud Platform
 
-<img src="_images/florida_map.png"/>
+#### [Deploying a Portfolio Investment Strategy in the Cloud](	https://dantokeefe.medium.com/deploying-a-portfolio-investment-strategy-in-the-cloud-415ef70ffdfb)
+- Deploy a Global Minimum Variance portfolio investment strategy with daily rebalances on Alpaca brokerage with a serverless function on AWS.
 
----
-[Project 2 Title](/pdf/sample_presentation.pdf)
+#### [Disease Classification from Blood Samples](https://danokeefe.github.io/HCV.html)
+- Predict if a patient has Hepatitis, Fibrosis, Cirrhosis, or no disease given lab readings from their blood sample.
+- Uses an ensemble of models: dense neural network, gradient boosted decision tree, and random forest.
+- Keras, XGBoost, and scikit-learn.
 
----
+#### [Plotting stock prices in Python](https://dantokeefe.medium.com/plotting-stock-prices-in-python-2b2aafaac5eb)
+- Plotting OHLC data using candlesticks
+
+### 2019
+
+### 2018
+
+#### [Tital Survival Prediction](https://github.com/DanOKeefe/TitanicPrediction/blob/master/Titanic_Prediction_v2.ipynb)
+#### [MNIST Digit Classification in R](https://github.com/DanOKeefe/KerasMNIST/blob/master/cnnMNIST.R)
+
+### 2017
+
+#### [Breast Tumor Classification](https://github.com/DanOKeefe/BreastTumorClassification/blob/master/BreastCancerNormalizeInputs.ipynb)
+#### [Bank Direct Marketing Campaign](https://github.com/DanOKeefe/BankDirectMarketingCampaign/blob/master/BankMarketing.ipynb)
+
+### Notes
+
+#### [Machine Learning Notes](https://danokeefe.github.io/ml_notes.html)
+- Explanations and demos of various machine learning topics and techniques.
+
+#### [Finance Notes](https://danokeefe.github.io/finance.html)
+- Retrieving and streaming data with financial APIs and websockets
+- Portfolio construction and risk analysis
+- Options pricing analysis
+- Backtesting investment strategies
+- Implementing investment strategies with Alpaca
+- Streaming live trading data to AWS
 
 ### Certifications
 - [Introduction to Deep Learning](https://coursera.org/share/bc6828c2a0b3a78b01c0644fb70bdb58)
