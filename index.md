@@ -1,8 +1,8 @@
 ### 2020
 
 #### [Near Real-Time Financial News Dataset with AWS Lambda](https://dantokeefe.medium.com/creating-a-near-real-time-financial-news-dataset-with-aws-lambda-509e2fe53261)
-- Deploy an automated serverless function with AWS Lambda to scrape and parse CNBC Finance articles daily.
-- Create a deployment package with Python libraries not included in the AWS Lambda Python 3.8 environment.
+- Create an automated serverless function with AWS Lambda to scrape and parse CNBC Finance articles daily.
+- Use a deployment package with Python libraries not included in the AWS Lambda Python 3.8 environment.
 - Save text files in an S3 bucket organized by year, month, and day, making it easily queryable from AWS Athena.
 
 #### [Iris Flower Classifier Web Application](https://github.com/DanOKeefe/Iris-Flower-Classifier-TF.js)
