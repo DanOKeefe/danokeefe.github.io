@@ -14,7 +14,7 @@
 - Retrieves data from Johns Hopkins repository
 - Ran on a VM with Google Cloud Platform
 
-<img src="_images/florida_map.PNG?raw=true" width=200" height="100"/>
+<img src="_images/florida_map.png?raw=true" width=200" height="100"/>
 
 ---
 [Project 2 Title](/pdf/sample_presentation.pdf)
