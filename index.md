@@ -4,7 +4,8 @@
 - Deploy an automated serverless function with AWS Lambda to scrape and parse CNBC Finance articles daily.
 - Create a deployment package with Python libraries not included in the AWS Lambda Python 3.8 environment.
 - Save text files in an S3 bucket organized by year, month, and day, making it easily queryable from AWS Athena.
-<img src="_images/lambda.PNG?raw=true"/ width="200" height="100">
+
+<img src="_images/lambda.PNG?raw=true"/ width="200" height="100"/>
 
 ---
 [Project 2 Title](/pdf/sample_presentation.pdf)
