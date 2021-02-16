@@ -13,8 +13,8 @@
 
 #### [COVID-19 Dashboard](https://github.com/DanOKeefe/COVID-19-Dashboard)
 - Web application for visualizing COVID-19 case density across the U.S. and Florida
-- Developed with Flask, a web framework in Python
-- Interactive visualizations created with Bokeh
+- Developed with Python webframework Flask
+- Interactive visualizations created with Python library Bokeh
 - Retrieves data from Johns Hopkins repository
 - Ran on a VM with Google Cloud Platform
 
