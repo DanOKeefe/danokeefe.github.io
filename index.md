@@ -1,11 +1,20 @@
 ### 2020
 
-##### [Creating a Near Real-Time Financial News Dataset with AWS Lambda](https://dantokeefe.medium.com/creating-a-near-real-time-financial-news-dataset-with-aws-lambda-509e2fe53261)
+#### [Near Real-Time Financial News Dataset with AWS Lambda](https://dantokeefe.medium.com/creating-a-near-real-time-financial-news-dataset-with-aws-lambda-509e2fe53261)
 - Deploy an automated serverless function with AWS Lambda to scrape and parse CNBC Finance articles daily.
 - Create a deployment package with Python libraries not included in the AWS Lambda Python 3.8 environment.
 - Save text files in an S3 bucket organized by year, month, and day, making it easily queryable from AWS Athena.
 
 <img src="_images/lambda.PNG?raw=true" width="200" height="100"/>
+
+#### [COVID-19 Dashboard](https://github.com/DanOKeefe/COVID-19-Dashboard)
+- Web application for visualizing COVID-19 case density across the U.S. and Florida
+- Developed with Flask, a web framework in Python
+- Interactive visualizations created with Bokeh
+- Retrieves data from Johns Hopkins repository
+- Ran on a VM with Google Cloud Platform
+
+<img src="_images/florida_map.PNG?raw=true" width=200" height="100"/>
 
 ---
 [Project 2 Title](/pdf/sample_presentation.pdf)
