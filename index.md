@@ -18,7 +18,7 @@
 - Retrieves data from Johns Hopkins repository
 - Ran on a VM with Google Cloud Platform
 
-#### [Deploying a Portfolio Investment Strategy in the Cloud](	https://dantokeefe.medium.com/deploying-a-portfolio-investment-strategy-in-the-cloud-415ef70ffdfb)
+#### [Deploying a Portfolio Investment Strategy in the Cloud](https://dantokeefe.medium.com/deploying-a-portfolio-investment-strategy-in-the-cloud-415ef70ffdfb)
 - Deploy a Global Minimum Variance portfolio investment strategy with daily rebalances on Alpaca brokerage with a serverless function on AWS.
 
 #### [Disease Classification from Blood Samples](https://danokeefe.github.io/HCV.html)
