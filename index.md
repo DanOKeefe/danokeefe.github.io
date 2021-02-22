@@ -5,11 +5,11 @@
 - Use a deployment package with Python libraries not included in the AWS Lambda Python 3.8 environment.
 - Save text files in an S3 bucket organized by year, month, and day, making it easily queryable from AWS Athena.
 
-#### [Iris Flower Classifier Web Application](https://github.com/DanOKeefe/Iris-Flower-Classifier-TF.js)
+#### [Iris Flower Classifier Web Application](https://danokeefe.github.io/iris.html)
 - Web application developed with TensorFlow.js that trains a feed-forward neural network within client's browser.
 - Enables the client to run live inference on custom inputs.
 - Visualizes confidence of the model's predictions using Plotly.js.
-- GitHub repo for the project [here](https://danokeefe.github.io/iris.html).
+- GitHub repo for the project [here](https://github.com/DanOKeefe/Iris-Flower-Classifier-TF.jshttps://danokeefe.github.io/iris.html).
 
 #### [COVID-19 Dashboard](https://github.com/DanOKeefe/COVID-19-Dashboard)
 - Web application for visualizing COVID-19 case density across the U.S. and Florida
