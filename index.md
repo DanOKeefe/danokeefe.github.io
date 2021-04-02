@@ -1,3 +1,11 @@
+### 2021
+
+#### [Create a Machine Learnining App with Streamlit](https://medium.com/geekculture/create-a-machine-learning-web-app-with-streamlit-f28c75f9f40f)
+  - Web application developed with Streamlit that runs a model server-side
+  - Visualizes confidence of the model's prediction with Plotly.
+  - Visualizes the user input compared to other datapoints on a PCA plot
+  - GitHub repo for the project can be viewed [here](https://github.com/DanOKeefe/Streamlit_Iris_Classifier).
+
 ### 2020
 
 #### [Near Real-Time Financial News Dataset with AWS Lambda](https://dantokeefe.medium.com/creating-a-near-real-time-financial-news-dataset-with-aws-lambda-509e2fe53261)
@@ -9,7 +17,7 @@
 - Web application developed with TensorFlow.js that trains a feed-forward neural network within client's browser.
 - Enables the client to run live inference on custom inputs.
 - Visualizes confidence of the model's predictions using Plotly.js.
-- GitHub repo for the project [here](https://github.com/DanOKeefe/Iris-Flower-Classifier-TF.jshttps://danokeefe.github.io/iris.html).
+- GitHub repo for the project can be viewed [here](https://github.com/DanOKeefe/Iris-Flower-Classifier-TF.jshttps://danokeefe.github.io/iris.html).
 
 #### [COVID-19 Dashboard](https://github.com/DanOKeefe/COVID-19-Dashboard)
 - Web application for visualizing COVID-19 case density across the U.S. and Florida
