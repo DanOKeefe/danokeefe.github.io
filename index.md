@@ -1,10 +1,11 @@
 ### 2021
 
-#### [Create a Machine Learnining App with Streamlit](https://medium.com/geekculture/create-a-machine-learning-web-app-with-streamlit-f28c75f9f40f)
+#### [Create a Machine Learnining App with Streamlit](https://share.streamlit.io/danokeefe/streamlit_iris_classifier/main/iris_app.py)
   - Web application developed with Streamlit that runs a model server-side
   - Visualizes confidence of the model's prediction with Plotly.
   - Visualizes the user input compared to other datapoints on a PCA plot
   - GitHub repo for the project can be viewed [here](https://github.com/DanOKeefe/Streamlit_Iris_Classifier).
+  - Article showing how I built this application [here](https://medium.com/geekculture/create-a-machine-learning-web-app-with-streamlit-f28c75f9f40f).
 
 ### 2020
 
