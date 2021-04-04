@@ -10,15 +10,15 @@
 #### [Create a Machine Learnining App with Streamlit](https://share.streamlit.io/danokeefe/streamlit_iris_classifier/main/iris_app.py)
   - Web application developed with Streamlit classify Iris flowers.
   - User can customize model input values using sliders in the sidebar.
-  - Visualizes confidence of the model's prediction with Plotly.
-  - Visualizes the user input compared to other datapoints on a PCA plot.
+  - Visualizes confidence of the model's prediction with [Plotly](https://plotly.com/python/plotly-express/).
+  - Visualizes the user input compared to other datapoints on a [PCA](https://en.wikipedia.org/wiki/Principal_component_analysis) plot.
   - GitHub repo for this project can be viewed [here](https://github.com/DanOKeefe/Streamlit_Iris_Classifier).
   - Article showing how I built this application [here](https://medium.com/geekculture/create-a-machine-learning-web-app-with-streamlit-f28c75f9f40f).
 
 ### 2020
 
 #### [Near Real-Time Financial News Dataset with AWS Lambda](https://dantokeefe.medium.com/creating-a-near-real-time-financial-news-dataset-with-aws-lambda-509e2fe53261)
-- Create an automated serverless function with AWS Lambda to scrape and parse CNBC Finance articles daily.
+- Create an automated serverless function with [AWS Lambda](https://aws.amazon.com/lambda/) to scrape and parse CNBC Finance articles daily.
 - Use a deployment package with Python libraries not included in the AWS Lambda Python 3.8 environment.
 - Save text files in an S3 bucket organized by year, month, and day, making it easily queryable from AWS Athena.
 
@@ -30,10 +30,10 @@
 
 #### [COVID-19 Dashboard](https://github.com/DanOKeefe/COVID-19-Dashboard)
 - Web application for visualizing COVID-19 case density across the U.S. and Florida
-- Developed with Python webframework Flask
-- Interactive visualizations created with Python library Bokeh
-- Retrieves data from Johns Hopkins repository
-- Ran on a VM with Google Cloud Platform
+- Developed with Python webframework [Flask](https://flask.palletsprojects.com/en/1.1.x/).
+- Interactive visualizations created with Python library [Bokeh](https://bokeh.org/).
+- Retrieves data from Johns Hopkins repository.
+- Ran on a VM with Google Cloud Platform.
 
 #### [Deploying a Portfolio Investment Strategy in the Cloud](https://dantokeefe.medium.com/deploying-a-portfolio-investment-strategy-in-the-cloud-415ef70ffdfb)
 - Deploy a Global Minimum Variance portfolio investment strategy with daily rebalances on Alpaca brokerage with a serverless function on AWS.
@@ -51,7 +51,14 @@
 ### 2018
 
 #### [Tital Survival Prediction](https://github.com/DanOKeefe/TitanicPrediction/blob/master/Titanic_Prediction_v2.ipynb)
+- Predict if a Titanic passenger will survive.
+- Data cleaning and preparation.
+- Feature engineering.
+- Use a neural network developed with TensorFlow.
+- 
 #### [MNIST Digit Classification in R](https://github.com/DanOKeefe/KerasMNIST/blob/master/cnnMNIST.R)
+- Classify an image of a hand-written digit with classes 0-9.
+- Utilize Keras in R.
 
 ### 2017
 
