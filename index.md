@@ -3,9 +3,9 @@
 #### [Image Classifier with MobileNet](https://share.streamlit.io/danokeefe/image-classifier/main/image_app.py)
   - Multi-page web application that allows users to classify an image of an object. 
   - Provides two methods of image input. The user can upload an image or provide an a URL to an image online.
-  - The web app processes the image for input into MobileNet and captions the image with the output prediction.
+  - The web app processes the image for input into [MobileNet](https://arxiv.org/abs/1704.04861) and captions the image with the output prediction.
   - GitHub repo for this project can be viewed [here](https://github.com/DanOKeefe/Image-Classifier/tree/main).
-  - Model is trained on 1,000 classes, listed [here](https://github.com/DanOKeefe/Image-Classifier/blob/main/imagenet_classes.txt).
+  - Model is trained on [1,000 classes](https://github.com/DanOKeefe/Image-Classifier/blob/main/imagenet_classes.txt).
 
 #### [Create a Machine Learnining App with Streamlit](https://share.streamlit.io/danokeefe/streamlit_iris_classifier/main/iris_app.py)
   - Web application developed with Streamlit classify Iris flowers.
