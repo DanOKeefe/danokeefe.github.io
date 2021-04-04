@@ -18,14 +18,14 @@
 ### 2020
 
 #### [Near Real-Time Financial News Dataset with AWS Lambda](https://dantokeefe.medium.com/creating-a-near-real-time-financial-news-dataset-with-aws-lambda-509e2fe53261)
-- Create an automated serverless function with [AWS Lambda](https://aws.amazon.com/lambda/) to scrape and parse CNBC Finance articles daily.
+- Create an automated serverless function with [AWS Lambda](https://aws.amazon.com/lambda/) to scrape and parse [CNBC Finance](https://www.cnbc.com/finance/) articles daily.
 - Use a deployment package with Python libraries not included in the AWS Lambda Python 3.8 environment.
-- Save text files in an S3 bucket organized by year, month, and day, making it easily queryable from AWS Athena.
+- Save text files in an S3 bucket organized by year, month, and day, making it easily queryable from [AWS Athena](https://aws.amazon.com/athena/).
 
 #### [Iris Flower Classifier Web Application](https://danokeefe.github.io/iris.html)
-- Web application developed with TensorFlow.js that trains a feed-forward neural network within client's browser.
+- Web application developed with [TensorFlow.js](https://www.tensorflow.org/js) that trains a feed-forward neural network within client's browser.
 - Enables the client to run live inference on custom inputs.
-- Visualizes confidence of the model's predictions using Plotly.js.
+- Visualizes confidence of the model's predictions using [Plotly.js](https://plotly.com/javascript/).
 - GitHub repo for the project can be viewed [here](https://github.com/DanOKeefe/Iris-Flower-Classifier-TF.jshttps://danokeefe.github.io/iris.html).
 
 #### [COVID-19 Dashboard](https://github.com/DanOKeefe/COVID-19-Dashboard)
@@ -33,15 +33,15 @@
 - Developed with Python webframework [Flask](https://flask.palletsprojects.com/en/1.1.x/).
 - Interactive visualizations created with Python library [Bokeh](https://bokeh.org/).
 - Retrieves data from Johns Hopkins repository.
-- Ran on a VM with Google Cloud Platform.
+- Ran on a VM with [Google Cloud Platform](https://cloud.google.com/).
 
 #### [Deploying a Portfolio Investment Strategy in the Cloud](https://dantokeefe.medium.com/deploying-a-portfolio-investment-strategy-in-the-cloud-415ef70ffdfb)
-- Deploy a Global Minimum Variance portfolio investment strategy with daily rebalances on Alpaca brokerage with a serverless function on AWS.
+- Deploy a [Global Minimum Variance portfolio](https://faculty.washington.edu/ezivot/econ424/portfolioTheoryMatrix-BEAMER.pdf) investment strategy with daily rebalances on [Alpaca brokerage](https://alpaca.markets/) with a serverless function on AWS.
 
 #### [Disease Classification from Blood Samples](https://danokeefe.github.io/HCV.html)
 - Predict if a patient has Hepatitis, Fibrosis, Cirrhosis, or no disease given lab readings from their blood sample.
 - Uses an ensemble of models: dense neural network, gradient boosted decision tree, and random forest.
-- Keras, XGBoost, and scikit-learn.
+- [Keras](https://keras.io/), [XGBoost](https://xgboost.readthedocs.io/en/latest/python/python_intro.html), and [scikit-learn](https://scikit-learn.org/).
 
 #### [Plotting stock prices in Python](https://dantokeefe.medium.com/plotting-stock-prices-in-python-2b2aafaac5eb)
 - Plotting OHLC data using candlesticks
@@ -58,7 +58,7 @@
 - 
 #### [MNIST Digit Classification in R](https://github.com/DanOKeefe/KerasMNIST/blob/master/cnnMNIST.R)
 - Classify an image of a hand-written digit with classes 0-9.
-- Utilize Keras in R.
+- Utilize [Keras](https://keras.rstudio.com/) in R.
 
 ### 2017
 
