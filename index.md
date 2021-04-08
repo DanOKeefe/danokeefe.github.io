@@ -8,7 +8,7 @@
   - Model is trained on [1,000 classes](https://github.com/DanOKeefe/Image-Classifier/blob/main/imagenet_classes.txt).
 
 #### [Create a Machine Learnining App with Streamlit](https://share.streamlit.io/danokeefe/streamlit_iris_classifier/main/iris_app.py)
-  - Web application developed with Streamlit classify Iris flowers.
+  - Web application developed with Streamlit to classify Iris flowers.
   - User can customize model input values using sliders in the sidebar.
   - Visualizes confidence of the model's prediction with [Plotly](https://plotly.com/python/plotly-express/).
   - Visualizes the user input compared to other datapoints on a [PCA](https://en.wikipedia.org/wiki/Principal_component_analysis) plot.
