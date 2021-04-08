@@ -55,7 +55,7 @@
 - Data cleaning and preparation.
 - Feature engineering.
 - Use a neural network developed with TensorFlow.
-- 
+
 #### [MNIST Digit Classification in R](https://github.com/DanOKeefe/KerasMNIST/blob/master/cnnMNIST.R)
 - Classify an image of a hand-written digit with classes 0-9.
 - Utilize [Keras](https://keras.rstudio.com/) in R.
