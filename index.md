@@ -14,6 +14,7 @@
   - Visualizes the user input compared to other datapoints on a [PCA](https://en.wikipedia.org/wiki/Principal_component_analysis) plot.
   - GitHub repo for this project can be viewed [here](https://github.com/DanOKeefe/Streamlit_Iris_Classifier).
   - Article showing how I built this application [here](https://medium.com/geekculture/create-a-machine-learning-web-app-with-streamlit-f28c75f9f40f).
+  - Article was included in Streamlit's [Weekly Roundup](https://discuss.streamlit.io/t/weekly-roundup-theming-tutorials-astronomy-pictures-combining-multiple-spreadsheets-and-more/11466)
 
 ### 2020
 
