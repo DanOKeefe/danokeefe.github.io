@@ -1,5 +1,12 @@
 ### 2021
 
+#### [Deploy a Machine Learning Model with FastAPI](https://dantokeefe.medium.com/deploy-a-machine-learning-model-with-fastapi-7a98bf7cb7c3)
+  - Create a RESTful API that serves a machine learning model.
+  - Version 1 allows users to pass inputs as path variables.
+  - Version 2 allows users to pass inputs as a JSON payload.
+  - [FastAPI](https://fastapi.tiangolo.com/) automatically generates interactive documentation for the API using [Swagger UI](https://swagger.io/tools/swagger-ui/) and [Redocly](https://redoc.ly/).
+  - GitHub repo for this project can be viewed [here](https://github.com/DanOKeefe/Iris_FastAPI).
+
 #### [Image Classifier with MobileNet](https://share.streamlit.io/danokeefe/image-classifier/main/image_app.py)
   - Multi-page web application that allows users to classify an image of an object. 
   - Provides two methods of image input. The user can upload an image or provide a URL to an image online.
