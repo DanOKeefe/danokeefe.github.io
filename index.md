@@ -4,7 +4,7 @@
   - Writing custom PyTorch Dataset classes to handle data during training.
   - Separating data processing code from training code, improving readability.
   - Enabling training on datasets that don't fit into memory.
-  - Utilizing transfer learning with a vision transformer model.
+  - Utilizing transfer learning with a [vision transformer model](https://arxiv.org/pdf/2010.11929.pdf) (vit_b_16).
   - GitHub repo containing two examples can be viewed [here](https://dantokeefe.medium.com/effective-data-handling-with-custom-pytorch-dataset-classes-b141bcb87b41)
     - Titanic dataset example
     - Food-101 dataset example
