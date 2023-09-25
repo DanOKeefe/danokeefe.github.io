@@ -1,7 +1,7 @@
 ### 2023
 
 ### [Effective Data Handling with Custom PyTorch Dataset Classes](https://dantokeefe.medium.com/effective-data-handling-with-custom-pytorch-dataset-classes-b141bcb87b41)
-  - Writing custom PyTorch Dataset classes to handle data during training.
+  - Writing custom PyTorch [Dataset](https://pytorch.org/tutorials/beginner/basics/data_tutorial.html) classes to handle data during training.
   - Separating data processing code from training code, improving readability.
   - Enabling training on datasets that don't fit into memory.
   - Utilizing transfer learning with a [vision transformer model](https://arxiv.org/pdf/2010.11929.pdf) (vit_b_16).
