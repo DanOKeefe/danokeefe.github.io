@@ -1,3 +1,14 @@
+### 2023
+
+### [Effective Data Handling with Custom PyTorch Dataset Classes](https://dantokeefe.medium.com/effective-data-handling-with-custom-pytorch-dataset-classes-b141bcb87b41)
+  - Writing custom PyTorch Dataset classes to handle data during training.
+  - Separating data processing code from training code, improving readability.
+  - Enabling training on datasets that don't fit into memory.
+  - Utilizing transfer learning with a vision transformer model.
+  - GitHub repo containing two examples can be viewed [here](https://dantokeefe.medium.com/effective-data-handling-with-custom-pytorch-dataset-classes-b141bcb87b41)
+    - Titanic dataset example
+    - Food-101 dataset example
+
 ### 2021
 
 #### [Sentiment Classification with BERT](https://github.com/DanOKeefe/BERT_Sentiment_Classification/tree/main)
