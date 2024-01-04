@@ -1,7 +1,7 @@
 ### 2024
 
-### [PDF Documents Manager](https://github.com/DanOKeefe/documents-manager)
-  - Web application for managing documents.
+### [Documents Manager](https://github.com/DanOKeefe/documents-manager)
+  - Web application for summarizing PDF documents.
   - Generates summaries for documents after upload.
   - Documents stored in S3, metadata and summaries stored in DynamoDB.
   - Pages for viewing existing documents and uploading new documents.
