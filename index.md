@@ -1,3 +1,11 @@
+### 2024
+
+### [PDF Documents Manager](https://github.com/DanOKeefe/documents-manager)
+  - Web application for managing documents.
+  - Generates summaries for documents after upload.
+  - Documents stored in S3, metadata and summaries stored in DynamoDB.
+  - Pages for viewing existing documents and uploading new documents.
+
 ### 2023
 
 ### [Effective Data Handling with Custom PyTorch Dataset Classes](https://dantokeefe.medium.com/effective-data-handling-with-custom-pytorch-dataset-classes-b141bcb87b41)
@@ -5,7 +13,7 @@
   - Separating data processing code from training code, improving readability.
   - Enabling training on datasets that don't fit into memory.
   - Utilizing transfer learning with a [vision transformer model](https://arxiv.org/pdf/2010.11929.pdf) (vit_b_16).
-  - GitHub repo containing two examples can be viewed [here](https://github.com/DanOKeefe/pytorch-custom-datasets)
+  - GitHub repo containing two examples can be viewed [here](https://github.com/DanOKeefe/pytorch-custom-datasets).
     - Titanic dataset example
     - Food-101 dataset example
 
