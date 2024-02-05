@@ -1,7 +1,7 @@
 ### 2024
 
 ### Aligning an LLM with Direct Preference Optimization
-  - Notebook example of fine-tuning a 1.6B parameter [model](stabilityai/stablelm-2-1_6b) from Stablity AI
+  - Notebook [example](https://github.com/DanOKeefe/danokeefe.github.io/blob/master/Direct%20Preference%20Optimization.html) of fine-tuning a 1.6B parameter [model](stabilityai/stablelm-2-1_6b) from Stablity AI
   - Uses a [dataset](https://huggingface.co/datasets/Anthropic/hh-rlhf) of human preference data released by Anthropic
 
 ### [Documents Manager](https://github.com/DanOKeefe/documents-manager)
