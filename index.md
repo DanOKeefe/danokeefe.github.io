@@ -3,7 +3,7 @@
 ### Aligning an LLM with Direct Preference Optimization
   - Notebook [example](https://danokeefe.github.io/Direct%20Preference%20Optimization.html) of fine-tuning a 1.6B parameter [model](stabilityai/stablelm-2-1_6b) from Stablity AI
   - Uses a [dataset](https://huggingface.co/datasets/Anthropic/hh-rlhf) of human preference data released by Anthropic
-  - Trains a new model that generates text more aligned with what humans prefer, rather than just modeling language based on what it saw during the unsupervised training portion of training.
+  - Trains a new model that generates text more aligned with what humans prefer, rather than just modeling language based on what it saw during the unsupervised portion of training.
 
 ### [Documents Manager](https://github.com/DanOKeefe/documents-manager)
   - Web application for summarizing PDF documents.
